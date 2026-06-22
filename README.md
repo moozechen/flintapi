@@ -1,19 +1,18 @@
-# 🔥 FlintAPI — One API Key. All Chinese LLMs.
+# 🔥 FlintAPI — One API Key for 25+ Chinese LLMs
 
 <p align="center">
-  <img src="https://flintapi.ai/favicon.svg" width="80" alt="FlintAPI" />
+  <img src="https://flintapi.ai/favicon.svg" width="80" alt="FlintAPI logo" />
 </p>
 
 <p align="center">
-  <strong>Access DeepSeek, Qwen, Kimi, GLM, MiniMax, and more through a single OpenAI-compatible endpoint.</strong><br>
-  Self-hosted Qwen on PPU silicon. $2 free credit. No credit card.
+  <a href="https://flintapi.ai"><img src="https://img.shields.io/badge/status-online-brightgreen" alt="Status"></a>
+  <a href="https://pypi.org/project/flintapi/"><img src="https://img.shields.io/badge/python-3.8%2B-blue" alt="Python"></a>
+  <a href="https://github.com/moozechen/flintapi/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
+  <a href="https://flintapi.ai/docs"><img src="https://img.shields.io/badge/docs-flintapi.ai-purple" alt="Docs"></a>
 </p>
 
 <p align="center">
-  <a href="https://flintapi.ai"><img src="https://img.shields.io/badge/website-flintapi.ai-purple" alt="Website"></a>
-  <a href="https://flintapi.ai/docs"><img src="https://img.shields.io/badge/docs-API_Reference-blue" alt="Docs"></a>
-  <a href="#models"><img src="https://img.shields.io/badge/models-25+-green" alt="Models"></a>
-  <a href="https://github.com/tokenmall/flintapi/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="License"></a>
+  <b>Access DeepSeek, Qwen, Kimi, GLM, MiniMax, and 20+ more models<br/>through a single OpenAI-compatible API. <a href="https://flintapi.ai/register">$2 free credit — no card required.</a></b>
 </p>
 
 ---
@@ -21,7 +20,7 @@
 ## Why FlintAPI?
 
 | | FlintAPI | Direct Provider | OpenRouter |
-|---|---|---|---|
+|---|:---:|:---:|:---:|
 | **25+ Chinese LLMs** | ✅ One API key | ❌ Per-provider account | ✅ |
 | **Self-hosted PPU Qwen** | ✅ Lower cost | ❌ Cloud pricing | ❌ |
 | **OpenAI-compatible** | ✅ Drop-in replacement | ⚠️ Varies | ✅ |
@@ -31,33 +30,29 @@
 
 ---
 
-## Quick Start
+## Quick Start (60 seconds)
 
-### 1. Sign up (60 seconds)
-```
-https://flintapi.ai/register
-```
-Get your free $2 credit instantly. No credit card.
+### 1. Register
+Go to [flintapi.ai/register](https://flintapi.ai/register) — you get **$2 free credit** instantly, no credit card required.
 
-### 2. Get your API key
-Find it in your [Dashboard](https://flintapi.ai/dashboard) → API Keys.
+### 2. Get your API Key
+Find it in your [Dashboard](https://flintapi.ai/dashboard) → Settings → Create Key. Copy it — it's shown only once!
 
 ### 3. Make your first call
 
+**cURL:**
 ```bash
 curl https://flintapi.ai/v1/chat/completions \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "deepseek-v4-pro",
+    "model": "flint-smart",
     "messages": [{"role": "user", "content": "Explain quantum computing in one sentence."}]
   }'
 ```
 
-### 4. Use any OpenAI SDK
-
+**Python** (with `pip install openai`):
 ```python
-# pip install openai
 from openai import OpenAI
 
 client = OpenAI(
@@ -66,14 +61,14 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="kimi-k2.6",
+    model="flint-smart",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 print(response.choices[0].message.content)
 ```
 
+**Node.js** (`npm install openai`):
 ```javascript
-// npm install openai
 import OpenAI from 'openai';
 
 const client = new OpenAI({
@@ -88,8 +83,8 @@ const completion = await client.chat.completions.create({
 console.log(completion.choices[0].message.content);
 ```
 
+**Go** (`go get github.com/sashabaranov/go-openai`):
 ```go
-// go get github.com/sashabaranov/go-openai
 import "github.com/sashabaranov/go-openai"
 
 client := openai.NewClient("YOUR_API_KEY")
@@ -101,125 +96,103 @@ resp, _ := client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
         {Role: "user", Content: "Hello!"},
     },
 })
+fmt.Println(resp.Choices[0].Message.Content)
 ```
 
 ---
 
-## Models
+## 🧠 flint-smart Router
+
+Don't know which model to pick? Use `"model": "flint-smart"` and our router auto-selects the best Chinese LLM for your prompt:
+
+| Prompt Type | Routed To | Why |
+|-------------|-----------|-----|
+| Code / programming | `deepseek-v4-pro` | Best coding LLM |
+| Reasoning / analysis | `deepseek-v4-pro` | Strong logic |
+| Chinese / bilingual | `deepseek-v4-pro` | Native Chinese |
+| General / default | `deepseek-v4-flash` | Fast & cheap |
+
+---
+
+## 📊 Available Models (18+)
 
 | Model | Provider | Context | Best For |
-|---|---|---|---|
-| `deepseek-v4-pro` | DeepSeek | 128K | Reasoning, coding |
-| `deepseek-v4-flash` | DeepSeek | 128K | Fast, cheap |
-| `qwen3.7-max` | Qwen | 128K | Top quality |
-| `qwen3.7-plus` | Qwen | 128K | Balanced |
-| `qwen3.6-max-preview` | Qwen | 128K | Cutting edge |
-| `qwen3.6-plus` | Qwen | 128K | General purpose |
-| `qwen3.6-flash` | Qwen | 128K | Lowest latency |
-| `qwen3.5-plus` | Qwen | 128K | All-rounder |
-| `qwen3.5-flash` | Qwen | 128K | Fast & cheap |
-| `qwen2.5-72b` | Qwen (PPU) | 32K | Self-hosted, cost-effective |
-| `kimi-k2.6` | Kimi | 128K | Long context |
+|-------|----------|---------|----------|
+| `deepseek-v4-pro` | DeepSeek | 128K | Reasoning & code |
+| `deepseek-v4-flash` | DeepSeek | 128K | Fast, cost-effective |
+| `qwen3.7-max` | Qwen | 128K | Flagship all-rounder |
+| `qwen3.7-plus` | Qwen | 128K | Balanced Chinese-English |
+| `qwen3.5-plus` | Qwen | 128K | Solid general-purpose |
+| `qwen3.5-flash` | Qwen | 128K | Lowest latency |
+| `kimi-k2.6` | Kimi | 256K | Long context |
 | `kimi-k2.5` | Kimi | 128K | Long context |
-| `glm-5.1` | GLM | 128K | Bilingual expert |
-| `glm-4.7` | GLM | 128K | Bilingual |
-| `MiniMax/MiniMax-M2.7` | MiniMax | 128K | Creative writing |
-| `MiniMax/MiniMax-M2.5` | MiniMax | 128K | Creative writing |
-| `llama-3.3-70b` | Meta | 128K | Open source |
-| `llama-3.1-8b` | Meta | 128K | Lightweight |
-| `flint-smart` | FlintAPI | — | Auto-routing |
+| `glm-5.1` | GLM | 32K | Bilingual expert |
+| `MiniMax-M2.7` | MiniMax | 512K | Creative writing |
 
-### Vision Models
-| Model | Type |
-|---|---|
-| `qwen-image-2.0` | Text-to-image |
-| `qwen-image-2.0-pro` | Pro image gen |
-| `wan2.7-image` | Text-to-image |
-| `wan2.7-image-pro` | Pro image gen |
-| `xiaomi/mimo-v2.5` | Text-to-image |
-| `xiaomi/mimo-v2.5-pro` | Pro image gen |
-
-> 💡 Use `flint-smart` for automatic model routing — FlintAPI picks the best model for your request.
+Full list & pricing: [flintapi.ai/pricing](https://flintapi.ai/pricing)
 
 ---
 
-## 🚀 PPU Self-Hosted Inference
+## 🔌 Python SDK
 
-FlintAPI self-hosts **Qwen2.5-72B** on custom **PPU (Processing-in-Pixel Unit)** silicon.
-
-- Lower cost than cloud GPU instances
-- Competitive per-token pricing passed to you
-- Same OpenAI-compatible API, lower bill
-
-[Learn more about PPU →](https://flintapi.ai/docs)
-
----
-
-## Streaming
+For an even simpler experience:
 
 ```bash
-curl https://flintapi.ai/v1/chat/completions \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "deepseek-v4-pro",
-    "messages": [{"role": "user", "content": "Write a haiku about AI"}],
-    "stream": true
-  }'
+pip install flintapi
+```
+
+```python
+from flintapi import Flint
+
+flint = Flint(api_key="YOUR_API_KEY")
+
+# Simple chat
+reply = flint.chat("Explain quantum computing in one sentence.")
+print(reply)
+
+# With model selection
+reply = flint.chat("Write a Python quicksort", model="flint-smart")
+print(reply)
+
+# Streaming
+for chunk in flint.chat_stream("Tell me a story"):
+    print(chunk, end="")
 ```
 
 ---
 
-## Referral Program
+## 📖 Docs & Resources
 
-Refer a friend → **you both get $1 credit**.
-
-1. Share your referral link: `https://flintapi.ai/register?ref=YOUR_CODE`
-2. They sign up → you both earn $1
-3. No limit on referrals
-
-Find your referral code in [Dashboard](https://flintapi.ai/dashboard).
-
----
-
-## Pricing
-
-Pay-as-you-go. Per-token pricing varies by model. See live pricing at [flintapi.ai/pricing](https://flintapi.ai/pricing).
-
-- **$2 free credit** — no credit card required
-- **Top up** via Stripe (credit/debit card) or USDT (crypto)
-- **No monthly fees, no hidden costs**
+- [API Docs](https://flintapi.ai/docs) — Full API reference with code examples
+- [Playground](https://flintapi.ai/playground) — Try models in your browser
+- [Pricing](https://flintapi.ai/pricing) — Per-token pricing for all models
+- [Compare](https://flintapi.ai/compare) — FlintAPI vs alternatives
+- [Status](https://flintapi.ai/status) — Real-time model health
+- [Dashboard](https://flintapi.ai/dashboard) — Usage, billing, API keys
 
 ---
 
-## API Reference
+## 🌟 Features
 
-Base URL: `https://flintapi.ai/v1`
-
-| Endpoint | Description |
-|---|---|
-| `GET /v1/models` | List all available models |
-| `POST /v1/chat/completions` | Chat completion (OpenAI-compatible) |
-| `GET /v1/models/{model_id}` | Get model details |
-
-For detailed API docs, visit [flintapi.ai/docs](https://flintapi.ai/docs).
-
----
-
-## Status
-
-Check service status: [flintapi.ai](https://flintapi.ai)
+- **One API key** for 25+ Chinese LLMs
+- **OpenAI-compatible** — change `base_url` and keep existing code
+- **flint-smart router** — auto-select best model per request  
+- **$2 free credit** — instant, no card required
+- **Real-time billing** — per-token pricing, usage dashboard
+- **4 language SDKs** — cURL, Python, Node.js, Go
+- **PPU self-hosted Qwen** — competitive pricing on custom silicon
+- **Referral program** — both you and your friend get $1
 
 ---
 
-## Community & Support
+## 🤝 Support
 
-- 📧 Email: support@flintapi.ai
-- 🐛 Issues: [GitHub Issues](https://github.com/tokenmall/flintapi/issues)
-- 💬 Coming soon: Discord
+- Email: [support@flintapi.ai](mailto:support@flintapi.ai)
+- GitHub Issues: [github.com/moozechen/flintapi/issues](https://github.com/moozechen/flintapi/issues)
+- Website: [flintapi.ai](https://flintapi.ai)
 
 ---
 
-## License
-
-MIT © 2026 FlintAPI
+<p align="center">
+  <sub>Built with 🔥 in Hong Kong | <a href="https://flintapi.ai/terms">Terms</a> · <a href="https://flintapi.ai/privacy">Privacy</a> · <a href="https://flintapi.ai/aup">AUP</a></sub>
+</p>
