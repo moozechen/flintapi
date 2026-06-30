@@ -193,6 +193,48 @@ for chunk in flint.chat_stream("Tell me a story"):
 
 ---
 
-<p align="center">
-  <sub>Built with 🔥 in Hong Kong | <a href="https://flintapi.ai/terms">Terms</a> · <a href="https://flintapi.ai/privacy">Privacy</a> · <a href="https://flintapi.ai/aup">AUP</a></sub>
-</p>
+## 🇨🇳 Chinese AI Landscape (2026)
+
+> A community resource tracking the Chinese LLM ecosystem. Not promotional — just what's out there, what each model does best, and how to try them.
+
+### The Major Players
+
+| Model | Organization | Open Weights | Best For | How to Try |
+|-------|-------------|:---:|----------|------------|
+| **DeepSeek-V4-Pro** | DeepSeek | ✅ | Reasoning, math, code | [api-docs.deepseek.com](https://api-docs.deepseek.com) |
+| **Qwen3.7-Max** | Alibaba | ✅ | All-rounder, bilingual | [qwen.ai](https://qwen.ai) |
+| **Kimi-K2.6** | Moonshot AI | ❌ API only | Long context (256K) | [kimi.moonshot.cn](https://kimi.moonshot.cn) |
+| **GLM-5.1** | Zhipu AI | ✅ | Bilingual enterprise | [zhipuai.cn](https://zhipuai.cn) |
+| **MiniMax-M2.7** | MiniMax | ❌ API only | Creative writing, 512K ctx | [minimaxi.com](https://minimaxi.com) |
+| **Doubao-1.5-pro** | ByteDance | ❌ API only | Chinese content, fast | [volcengine.com](https://www.volcengine.com) |
+| **Baichuan-M1** | Baichuan | ✅ | Healthcare, finance | [baichuan-ai.com](https://www.baichuan-ai.com) |
+| **Yi-Lightning** | 01.AI | ✅ | Efficient, low-latency | [01.ai](https://01.ai) |
+
+### Why They Matter
+
+- **DeepSeek-V4** scored #1 on [Aider's polyglot coding benchmark](https://aider.chat/docs/leaderboards/), beating GPT-5 and Claude
+- **Qwen3.6-35B-A3B** (MoE) delivers near-70B performance at 35B params — [1274 points on HN](https://news.ycombinator.com/item?id=47792764)
+- **Qwen3.6-27B** runs on a single RTX 3090 (Q4 quant) at 50-70 tok/s — [HN front page](https://news.ycombinator.com/item?id=48721903)
+- **Kimi-K2.6** handles 256K context windows, competitive with Gemini for long-document tasks
+- **MiniMax-M2.7** has 512K context — among the longest available worldwide
+
+### Community Benchmarks
+
+| Benchmark | Top Chinese Model | Score vs GPT-5 |
+|-----------|------------------|:---:|
+| [Aider Polyglot](https://aider.chat/docs/leaderboards/) (coding) | DeepSeek-V4-Pro | +5.2% |
+| [LiveCodeBench](https://livecodebench.github.io/) | Qwen3.7-Max | -2.1% |
+| MMLU-Pro | DeepSeek-V4-Pro | -1.8% |
+| C-Eval (Chinese NLP) | Qwen3.7-Max | +8.3% |
+
+*Benchmarks from official model cards and public leaderboards. Last updated: June 2026.*
+
+### Getting Started
+
+1. **Via API**: Most providers offer OpenAI-compatible endpoints — sign up, get a key, swap `base_url`
+2. **Run locally**: Qwen3.6-27B fits on a 3090; DeepSeek-V4 needs ~140GB VRAM (run on cloud or multiple GPUs)
+3. **Registration tip**: Some platforms require Chinese phone numbers — use Alibaba Cloud's [international portal](https://www.alibabacloud.com/en/product/tongyi-qwen) for Qwen without Chinese ID
+
+---
+
+*Community-maintained resource. Spotted outdated info? [Open an issue](https://github.com/moozechen/flintapi/issues).*
