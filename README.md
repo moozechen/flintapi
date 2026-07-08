@@ -1,4 +1,4 @@
-# 🔥 FlintAPI — One API Key for 25+ Chinese LLMs
+# 🔥 FlintAPI — Smart Routing for AI
 
 <p align="center">
   <img src="https://flintapi.ai/favicon.svg" width="80" alt="FlintAPI logo" />
@@ -12,28 +12,29 @@
 </p>
 
 <p align="center">
-  <b>Access DeepSeek, Qwen, Kimi, GLM, MiniMax, and 20+ more models<br/>through a single OpenAI-compatible API. <a href="https://flintapi.ai/register">$2 free credit — no card required.</a></b>
+  <b>One endpoint. Smart Routing auto-decomposes every prompt,<br/>picks the best model per sub-task. No model selection needed.<br/><a href="https://flintapi.ai/register">$5 free credit — no card required.</a></b>
 </p>
 
 ---
 
 ## Why FlintAPI?
 
+FlintAPI is a **Smart Routing engine** — not a model aggregator. When you send a prompt, FlintAPI's router **decomposes** it into sub-tasks, **dispatches** each to the best-suited model, and returns the combined result. You never need to pick a model.
+
 | | FlintAPI | Direct Provider | OpenRouter |
 |---|:---:|:---:|:---:|
-| **25+ Chinese LLMs** | ✅ One API key | ❌ Per-provider account | ✅ |
-| **Self-hosted PPU Qwen** | ✅ Lower cost | ❌ Cloud pricing | ❌ |
+| **Smart Routing** | ✅ Decompose & Dispatch | ❌ Manual model selection | ❌ Basic routing only |
 | **OpenAI-compatible** | ✅ Drop-in replacement | ⚠️ Varies | ✅ |
-| **Free credit** | ✅ $2, no card | ❌ | ⚠️ Limited |
-| **No middleman markup** | ✅ Self-hosted | ✅ | ❌ Markup |
+| **Free credit** | ✅ $5, no card | ❌ | ⚠️ Limited |
 | **Referral bonus** | ✅ $1 each | ❌ | ❌ |
+| **Multi-SDK** | ✅ Python, Node, Go, curl | ⚠️ Per-provider | ✅ |
 
 ---
 
 ## Quick Start (60 seconds)
 
 ### 1. Register
-Go to [flintapi.ai/register](https://flintapi.ai/register) — you get **$2 free credit** instantly, no credit card required.
+Go to [flintapi.ai/register](https://flintapi.ai/register) — you get **$5 free credit** instantly, no credit card required.
 
 ### 2. Get your API Key
 Find it in your [Dashboard](https://flintapi.ai/dashboard) → Settings → Create Key. Copy it — it's shown only once!
@@ -103,7 +104,7 @@ fmt.Println(resp.Choices[0].Message.Content)
 
 ## 🧠 flint-smart Router
 
-Don't know which model to pick? Use `"model": "flint-smart"` and our router auto-selects the best Chinese LLM for your prompt:
+Don't know which model to pick? Use `"model": "flint-smart"` and our router auto-selects the best model for your prompt:
 
 | Prompt Type | Routed To | Why |
 |-------------|-----------|-----|
@@ -114,7 +115,9 @@ Don't know which model to pick? Use `"model": "flint-smart"` and our router auto
 
 ---
 
-## 📊 Available Models (18+)
+## 📊 Available Models
+
+The Smart Router automatically selects from these models:
 
 | Model | Provider | Context | Best For |
 |-------|----------|---------|----------|
@@ -174,14 +177,45 @@ for chunk in flint.chat_stream("Tell me a story"):
 
 ## 🌟 Features
 
-- **One API key** for 25+ Chinese LLMs
+- **Smart Routing** — Decompose & Dispatch: one prompt auto-routed to optimal models per sub-task
 - **OpenAI-compatible** — change `base_url` and keep existing code
 - **flint-smart router** — auto-select best model per request  
-- **$2 free credit** — instant, no card required
+- **$5 free credit** — instant, no card required
 - **Real-time billing** — per-token pricing, usage dashboard
 - **4 language SDKs** — cURL, Python, Node.js, Go
-- **PPU self-hosted Qwen** — competitive pricing on custom silicon
 - **Referral program** — both you and your friend get $1
+
+---
+
+## 🚀 Deployment
+
+FlintAPI is deployed as a production service on flintapi.ai. To self-host or contribute:
+
+```bash
+# Clone the repo
+git clone https://github.com/moozechen/flintapi.git
+cd flintapi
+
+# Backend (FastAPI)
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 3001
+
+# Frontend (React + Vite)
+cd frontend
+npm install
+npm run build   # output to ../static/
+
+# Nginx reverse proxy
+# See nginx/example.conf for a sample configuration
+```
+
+**Production stack:**
+- **Frontend:** React 18 + Vite, served via Nginx
+- **Backend:** FastAPI (Python 3.10+), OpenAI-compatible `/v1` endpoints
+- **Router:** flint-smart decompose & dispatch engine
+- **Database:** SQLite (token relay, usage logs)
+- **Deployment:** Ubuntu 22.04, Nginx reverse proxy, Let's Encrypt SSL
 
 ---
 
