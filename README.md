@@ -138,10 +138,10 @@ Full list & pricing: [flintapi.ai/pricing](https://flintapi.ai/pricing)
 
 ## 🔌 Python SDK
 
-For an even simpler experience:
+A thin OpenAI-compatible wrapper lives in [`flintapi/`](./flintapi) in this repo. Install it directly from source:
 
 ```bash
-pip install flintapi
+pip install git+https://github.com/moozechen/flintapi.git
 ```
 
 ```python
@@ -187,27 +187,16 @@ for chunk in flint.chat_stream("Tell me a story"):
 
 ---
 
-## 🚀 Deployment
+## 🚀 Architecture
 
-FlintAPI is deployed as a production service on flintapi.ai. To self-host or contribute:
+FlintAPI runs as a hosted service on [flintapi.ai](https://flintapi.ai) — just grab a key and call the `/v1` endpoints. This repo ships the open-source **Python SDK**; the routing engine itself is operated as a managed service.
+
+To use the SDK from source:
 
 ```bash
-# Clone the repo
 git clone https://github.com/moozechen/flintapi.git
 cd flintapi
-
-# Backend (FastAPI)
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 3001
-
-# Frontend (React + Vite)
-cd frontend
-npm install
-npm run build   # output to ../static/
-
-# Nginx reverse proxy
-# See nginx/example.conf for a sample configuration
+pip install -e .
 ```
 
 **Production stack:**
