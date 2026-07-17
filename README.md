@@ -78,7 +78,7 @@ const client = new OpenAI({
 });
 
 const completion = await client.chat.completions.create({
-  model: 'qwen3.7-max',
+  model: 'flint-smart',
   messages: [{ role: 'user', content: 'Say hello in Chinese' }],
 });
 console.log(completion.choices[0].message.content);
@@ -92,7 +92,7 @@ client := openai.NewClient("YOUR_API_KEY")
 client.BaseURL = "https://flintapi.ai/v1"
 
 resp, _ := client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-    Model: "glm-5.1",
+    Model: "flint-smart",
     Messages: []openai.ChatCompletionMessage{
         {Role: "user", Content: "Hello!"},
     },
@@ -108,10 +108,11 @@ Don't know which model to pick? Use `"model": "flint-smart"` and our router auto
 
 | Prompt Type | Routed To | Why |
 |-------------|-----------|-----|
-| Code / programming | `deepseek-v4-pro` | Best coding LLM |
-| Reasoning / analysis | `deepseek-v4-pro` | Strong logic |
-| Chinese / bilingual | `deepseek-v4-pro` | Native Chinese |
-| General / default | `deepseek-v4-flash` | Fast & cheap |
+| Code / programming | `deepseek-v4-pro` | #1 coding benchmark (Aider) |
+| Creative writing | `MiniMax-M2.7` | Fluency & style, 512K context |
+| Chinese / bilingual | `glm-5.1` | Bilingual expert, enterprise-grade |
+| Reasoning / analysis | `qwen3.7-max` | Flagship all-rounder, strong logic |
+| General / default | `deepseek-v4-flash` | Fast, cost-effective fallback |
 
 ---
 
@@ -261,3 +262,4 @@ pip install -e .
 ---
 
 *Community-maintained resource. Spotted outdated info? [Open an issue](https://github.com/moozechen/flintapi/issues).*
+
