@@ -1,4 +1,4 @@
-# 🔥 FlintAPI — Smart Routing for AI
+# 🔥 FlintAPI — AI Consulting Engine + Smart Routing
 
 <p align="center">
   <img src="https://flintapi.ai/favicon.svg" width="80" alt="FlintAPI logo" />
@@ -12,17 +12,63 @@
 </p>
 
 <p align="center">
-  <b>One endpoint. Smart Routing auto-decomposes every prompt,<br/>picks the best model per sub-task. No model selection needed.<br/><a href="https://flintapi.ai/register">$5 free credit — no card required.</a></b>
+  <b>AI Consulting Engine that decomposes complex questions,<br/>routes each sub-task to the optimal model, and synthesizes expert output.<br/><a href="https://flintapi.ai/register">$5 free credit — no card required.</a></b>
 </p>
+
+---
+
+## 🧠 flint-consulting: AI-Powered Expert Analysis
+
+FlintAPI's **consulting engine** (`flint-consulting`) uses multi-model synthesis to produce McKinsey-style strategic reports. It decomposes complex business and technical questions, dispatches sub-tasks to specialized models, and synthesizes the results into comprehensive, structured analyses.
+
+### Example: Cloud Platform Comparison
+
+```bash
+curl https://flintapi.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "flint-consulting",
+    "messages": [{"role": "user", "content": "Compare AWS vs GCP for an AI-native startup with 20 engineers"}]
+  }'
+```
+
+**Sample output** (from real consulting report, July 2026):
+
+> *"GCP's integrated AI stack (Vertex AI + Gemini ecosystem) offers 30-40% faster time-to-first-prototype than AWS. GCP deployments reached production 22% faster (median 18 days vs. 23 days). Total 2-year TCO for AI/ML workloads: $96,900 (GCP) vs. $123,000 (AWS) — a 21% savings."*
+
+### Example: Protocol Architecture Decision
+
+```bash
+curl https://flintapi.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{"model":"flint-consulting","messages":[{"role":"user","content":"WebSocket vs SSE vs gRPC for a real-time dashboard with 10K concurrent users"}]}'
+```
+
+**Sample output** (from real consulting report, July 2026):
+
+> *"68% of teams over-engineer their real-time layer. For server-push-only workloads like dashboards, SSE delivers identical performance with zero operational overhead. Benchmark: SSE at 12% CPU / 480MB / 45ms P99 for 10K concurrent — statistically indistinguishable from WebSocket at 14% CPU / 520MB / 42ms P99."*
+
+### How flint-consulting Works
+
+| Stage | Model(s) | Function |
+|-------|----------|----------|
+| **Decompose** | `deepseek-v4-flash` | MECE breakdown of the question into independent sub-tasks |
+| **Analyze (parallel)** | `deepseek-v4-pro`, `qwen3.7-max`, `glm-5.1` | Each sub-task assigned to the best specialist model |
+| **Synthesize** | `deepseek-v4-pro` | Weave results into one coherent report with confidence scoring |
+| **Verify** | `qwen3.7-max` | Cross-reference facts, flag contradictions, assign confidence (0-1) |
+
+**Published consulting reports**: [AWS vs GCP (cloud strategy)](https://flintapi.ai/blog?post=aws-vs-gcp-consulting) · [WebSocket vs SSE vs gRPC (protocols)](https://flintapi.ai/blog?post=websocket-sse-grpc-consulting) · [Full blog →](https://flintapi.ai/blog)
 
 ---
 
 ## Why FlintAPI?
 
-FlintAPI is a **Smart Routing engine** — not a model aggregator. When you send a prompt, FlintAPI's router **decomposes** it into sub-tasks, **dispatches** each to the best-suited model, and returns the combined result. You never need to pick a model.
+FlintAPI is an **AI Consulting Engine** powered by Smart Routing. When you send a prompt, FlintAPI's router **decomposes** it into sub-tasks, **dispatches** each to the best-suited model, and returns the combined result. You never need to pick a model.
 
 | | FlintAPI | Direct Provider | OpenRouter |
 |---|:---:|:---:|:---:|
+| **AI Consulting** | ✅ Multi-model synthesis | ❌ Single-model | ❌ Basic routing only |
 | **Smart Routing** | ✅ Decompose & Dispatch | ❌ Manual model selection | ❌ Basic routing only |
 | **OpenAI-compatible** | ✅ Drop-in replacement | ⚠️ Varies | ✅ |
 | **Free credit** | ✅ $5, no card | ❌ | ⚠️ Limited |
@@ -47,8 +93,8 @@ curl https://flintapi.ai/v1/chat/completions \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "flint-smart",
-    "messages": [{"role": "user", "content": "Explain quantum computing in one sentence."}]
+    "model": "flint-consulting",
+    "messages": [{"role": "user", "content": "Should my startup use AWS or GCP?"}]
   }'
 ```
 
@@ -62,8 +108,8 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="flint-smart",
-    messages=[{"role": "user", "content": "Hello!"}]
+    model="flint-consulting",
+    messages=[{"role": "user", "content": "Compare WebSocket vs SSE vs gRPC"}]
 )
 print(response.choices[0].message.content)
 ```
@@ -78,8 +124,8 @@ const client = new OpenAI({
 });
 
 const completion = await client.chat.completions.create({
-  model: 'flint-smart',
-  messages: [{ role: 'user', content: 'Say hello in Chinese' }],
+  model: 'flint-consulting',
+  messages: [{ role: 'user', content: 'Compare cloud providers for AI workloads' }],
 });
 console.log(completion.choices[0].message.content);
 ```
@@ -92,9 +138,9 @@ client := openai.NewClient("YOUR_API_KEY")
 client.BaseURL = "https://flintapi.ai/v1"
 
 resp, _ := client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-    Model: "flint-smart",
+    Model: "flint-consulting",
     Messages: []openai.ChatCompletionMessage{
-        {Role: "user", Content: "Hello!"},
+        {Role: "user", Content: "AWS vs GCP for AI startup?"},
     },
 })
 fmt.Println(resp.Choices[0].Message.Content)
@@ -104,9 +150,14 @@ fmt.Println(resp.Choices[0].Message.Content)
 
 ## 🧠 flint-smart Router
 
-Don't know which model to pick? Use `"model": "flint-smart"` and our router auto-selects the best model for your prompt:
+Use `"model": "flint-smart"` for general-purpose auto-routing. Use `"model": "flint-consulting"` for multi-model synthesized reports.
 
-| Prompt Type | Routed To | Why |
+| Model | Best For |
+|-------|----------|
+| `flint-consulting` | Strategic reports, comparisons, architecture decisions, technical analysis |
+| `flint-smart` | General chat, coding, quick Q&A with auto model selection |
+
+| Prompt Type | flint-smart Routes To | Why |
 |-------------|-----------|-----|
 | Code / programming | `deepseek-v4-pro` | #1 coding benchmark (Aider) |
 | Creative writing | `MiniMax-M2.7` | Fluency & style, 512K context |
@@ -150,11 +201,11 @@ from flintapi import Flint
 
 flint = Flint(api_key="YOUR_API_KEY")
 
-# Simple chat
-reply = flint.chat("Explain quantum computing in one sentence.")
-print(reply)
+# Consulting report
+report = flint.chat("Compare AWS vs GCP for AI startups", model="flint-consulting")
+print(report)
 
-# With model selection
+# Smart routing
 reply = flint.chat("Write a Python quicksort", model="flint-smart")
 print(reply)
 
@@ -171,6 +222,7 @@ for chunk in flint.chat_stream("Tell me a story"):
 - [Playground](https://flintapi.ai/playground) — Try models in your browser
 - [Pricing](https://flintapi.ai/pricing) — Per-token pricing for all models
 - [Compare](https://flintapi.ai/compare) — FlintAPI vs alternatives
+- [Blog](https://flintapi.ai/blog) — Consulting reports, guides, and tutorials
 - [Status](https://flintapi.ai/status) — Real-time model health
 - [Dashboard](https://flintapi.ai/dashboard) — Usage, billing, API keys
 
@@ -178,6 +230,7 @@ for chunk in flint.chat_stream("Tell me a story"):
 
 ## 🌟 Features
 
+- **AI Consulting Engine** — Multi-model synthesis for strategic analysis and technical reports
 - **Smart Routing** — Decompose & Dispatch: one prompt auto-routed to optimal models per sub-task
 - **OpenAI-compatible** — change `base_url` and keep existing code
 - **flint-smart router** — auto-select best model per request  
@@ -203,6 +256,7 @@ pip install -e .
 **Production stack:**
 - **Frontend:** React 18 + Vite, served via Nginx
 - **Backend:** FastAPI (Python 3.10+), OpenAI-compatible `/v1` endpoints
+- **Consulting Engine:** flint-consulting — multi-model MECE decomposition + parallel execution + synthesis
 - **Router:** flint-smart decompose & dispatch engine
 - **Database:** SQLite (token relay, usage logs)
 - **Deployment:** Ubuntu 22.04, Nginx reverse proxy, Let's Encrypt SSL
@@ -262,4 +316,3 @@ pip install -e .
 ---
 
 *Community-maintained resource. Spotted outdated info? [Open an issue](https://github.com/moozechen/flintapi/issues).*
-
